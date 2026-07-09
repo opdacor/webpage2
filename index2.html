@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServiEquip | Maquinaria & Servicios Industriales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #0b1f3a;
+    --navy-mid:  #0e2a4f;
+    --blue:      #1550a0;
+    --blue-mid:  #1a65c8;
+    --blue-light:#2d7de8;
+    --sky:       #e8f1fb;
+    --white:     #ffffff;
+    --off-white: #f4f7fc;
+    --gold:      #f0b429;
+    --gold-dark: #d4970a;
+    --gold-light:#fad36b;
+    --gray:      #6b7a96;
+    --gray-light:#c2cfe0;
+    --text:      #1a2840;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5rem;
+    height: 72px;
+    background: rgba(11,31,58,0.97);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid rgba(240,180,41,0.25);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 1.5rem;
+    color: var(--white); text-decoration: none;
+    letter-spacing: .02em;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .logo-accent {
+    width: 8px; height: 8px; background: var(--gold);
+    border-radius: 50%; display: inline-block;
+    box-shadow: 0 0 10px rgba(240,180,41,.6);
+  }
+  .logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none; align-items: center;
+  }
+  .nav-links a {
+    font-size: .875rem; font-weight: 500; letter-spacing: .06em;
+    text-decoration: none; color: rgba(255,255,255,.75);
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    padding: .55rem 1.5rem;
+    font-weight: 600 !important;
+    border-radius: 2px;
+    transition: background .2s, transform .15s !important;
+  }
+  .nav-cta:hover { background: var(--gold-dark) !important; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; min-height: 100vh;
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  /* Diagonal geometric pattern */
+  .hero-pattern {
+    position: absolute; inset: 0; z-index: 0; overflow: hidden;
+  }
+  .hero-pattern::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%; width: 70%; height: 140%;
+    background: var(--navy-mid);
+    transform: skewX(-8deg);
+  }
+  .hero-pattern::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+  }
+
+  /* Grid lines overlay */
+  .hero-grid-overlay {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Floating circles */
+  .hero-circle {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    border: 1px solid rgba(240,180,41,.15);
+  }
+  .hero-circle-1 { width: 500px; height: 500px; top: -100px; right: -80px; animation: rotateSlow 30s linear infinite; }
+  .hero-circle-2 { width: 300px; height: 300px; bottom: 60px; right: 80px; border-color: rgba(255,255,255,.06); animation: rotateSlow 20s linear infinite reverse; }
+  .hero-circle-3 { width: 180px; height: 180px; top: 120px; right: 280px; border-color: rgba(240,180,41,.08); animation: rotateSlow 15s linear infinite; }
+  @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .hero-left {
+    position: relative; z-index: 2;
+    padding: 10rem 4rem 6rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: .8rem;
+    font-size: .75rem; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 2rem;
+    animation: fadeUp .7s ease both;
+  }
+  .eyebrow-line { flex: 1; max-width: 40px; height: 1px; background: var(--gold); opacity: .5; }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 1.05;
+    color: var(--white);
+    animation: fadeUp .8s ease .1s both;
+  }
+  .hero-title .line-gold { color: var(--gold); font-style: italic; }
+
+  .hero-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.85;
+    color: rgba(255,255,255,.65);
+    max-width: 440px; margin-top: 1.8rem;
+    animation: fadeUp .8s ease .25s both;
+  }
+
+  .hero-divider {
+    width: 60px; height: 3px;
+    background: var(--gold);
+    margin: 2rem 0;
+    animation: expandW .7s ease .35s both;
+  }
+  @keyframes expandW { from { width:0; opacity:0; } to { width:60px; opacity:1; } }
+
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp .8s ease .4s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(28px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .btn-gold {
+    font-size: .875rem; font-weight: 600; letter-spacing: .06em;
+    text-decoration: none; color: var(--navy);
+    background: var(--gold);
+    padding: .9rem 2rem;
+    border-radius: 2px;
+    display: inline-flex; align-items: center; gap: .5rem;
+    transition: background .2s, transform .15s, box-shadow .2s;
+  }
+  .btn-gold:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(240,180,41,.35);
+  }
+
+  .btn-outline-white {
+    font-size: .875rem; font-weight: 500; letter-spacing: .06em;
+    text-decoration: none; color: var(--white);
+    background: transparent;
+    padding: .9rem 2rem;
+    border: 1.5px solid rgba(255,255,255,.25);
+    border-radius: 2px;
+    display: inline-flex; align-items: center; gap: .5rem;
+    transition: border-color .2s, color .2s, transform .15s;
+  }
+  .btn-outline-white:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    animation: fadeUp .8s ease .55s both;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-label { font-size: .75rem; font-weight: 500; letter-spacing: .06em; color: rgba(255,255,255,.45); margin-top: .25rem; }
+
+  /* RIGHT side of hero — cards */
+  .hero-right {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 10rem 5rem 6rem 3rem;
+    gap: 1rem;
+  }
+
+  .hero-feature-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 1.4rem 1.8rem;
+    border-radius: 4px;
+    display: flex; align-items: center; gap: 1.2rem;
+    backdrop-filter: blur(8px);
+    transition: background .3s, border-color .3s, transform .3s;
+    animation: slideLeft .6s ease both;
+  }
+  .hero-feature-card:nth-child(1) { animation-delay: .2s; }
+  .hero-feature-card:nth-child(2) { animation-delay: .35s; }
+  .hero-feature-card:nth-child(3) { animation-delay: .5s; }
+  .hero-feature-card:nth-child(4) { animation-delay: .65s; }
+  .hero-feature-card:hover { background: rgba(255,255,255,.1); border-color: rgba(240,180,41,.3); transform: translateX(-4px); }
+
+  @keyframes slideLeft {
+    from { opacity:0; transform: translateX(30px); }
+    to { opacity:1; transform: translateX(0); }
+  }
+
+  .hero-fc-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(240,180,41,.15);
+    border: 1px solid rgba(240,180,41,.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .hero-fc-title {
+    font-size: .95rem; font-weight: 600; color: var(--white);
+    margin-bottom: .2rem;
+  }
+  .hero-fc-desc { font-size: .8rem; color: rgba(255,255,255,.5); }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--gold);
+    padding: 1rem 0;
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: flex; gap: 0; align-items: center;
+    animation: ticker 28s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .ticker-item {
+    font-size: .8rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--navy);
+    padding: 0 2.5rem; flex-shrink: 0;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .ticker-sep { width: 4px; height: 4px; background: var(--navy); border-radius: 50%; opacity: .4; }
+
+  /* ── SECTION COMMON ── */
+  .s-pad { padding: 7rem 5rem; }
+  .s-pad-sm { padding: 5rem 5rem; }
+
+  .s-eyebrow {
+    font-size: .75rem; font-weight: 700; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--blue-mid);
+    display: flex; align-items: center; gap: .7rem;
+    margin-bottom: .9rem;
+  }
+  .s-eyebrow::before {
+    content: ''; width: 32px; height: 2px;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  .s-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.1; color: var(--navy);
+  }
+  .s-title em { font-style: italic; color: var(--blue-mid); }
+
+  .s-desc {
+    font-size: .95rem; font-weight: 300; line-height: 1.85;
+    color: var(--gray); max-width: 520px; margin-top: 1rem;
+  }
+
+  /* ── ARRIENDO ── */
+  #arriendo { background: var(--off-white); }
+
+  .arriendo-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 2rem;
+  }
+
+  .maq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .maq-card {
+    background: var(--white);
+    border: 1.5px solid rgba(21,80,160,.08);
+    border-radius: 6px;
+    padding: 2.2rem 2rem;
+    position: relative; overflow: hidden;
+    transition: border-color .3s, box-shadow .3s, transform .3s;
+  }
+  .maq-card:hover {
+    border-color: var(--blue-mid);
+    box-shadow: 0 12px 40px rgba(21,80,160,.1);
+    transform: translateY(-4px);
+  }
+  .maq-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue-mid), var(--blue-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s ease;
+  }
+  .maq-card:hover::before { transform: scaleX(1); }
+
+  .maq-icon-wrap {
+    width: 56px; height: 56px; border-radius: 12px;
+    background: var(--sky);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1.4rem;
+    transition: background .3s;
+  }
+  .maq-card:hover .maq-icon-wrap { background: var(--blue-mid); }
+
+  .maq-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--navy); margin-bottom: .5rem;
+  }
+  .maq-desc { font-size: .875rem; color: var(--gray); line-height: 1.7; }
+
+  .maq-badge {
+    display: inline-flex; align-items: center; gap: .35rem;
+    margin-top: 1.2rem;
+    font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--blue-mid);
+    background: var(--sky); padding: .3rem .8rem; border-radius: 20px;
+  }
+  .maq-badge::before { content: '●'; font-size: .5rem; color: #22c55e; }
+
+  .maq-card-special {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-color: transparent;
+  }
+  .maq-card-special:hover { border-color: var(--gold); }
+  .maq-card-special .maq-icon-wrap { background: rgba(240,180,41,.15); }
+  .maq-card-special .maq-name { color: var(--gold); }
+  .maq-card-special .maq-desc { color: rgba(255,255,255,.6); }
+
+  /* ── SERVICIOS ── */
+  #servicios { background: var(--white); }
+
+  .servicios-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3.5rem;
+  }
+
+  .serv-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+
+  .serv-card {
+    background: var(--off-white);
+    border: 1.5px solid rgba(21,80,160,.07);
+    border-radius: 6px;
+    padding: 1.6rem;
+    transition: background .25s, border-color .25s, transform .25s;
+    cursor: default;
+  }
+  .serv-card:hover {
+    background: var(--sky);
+    border-color: rgba(21,80,160,.2);
+    transform: translateY(-2px);
+  }
+
+  .serv-card-icon { font-size: 1.6rem; margin-bottom: .8rem; display: block; }
+  .serv-card-name {
+    font-size: .9rem; font-weight: 600; color: var(--navy);
+    line-height: 1.3;
+  }
+  .serv-card-tag {
+    font-size: .7rem; font-weight: 500; color: var(--gray);
+    margin-top: .3rem;
+  }
+
+  .servicios-right-panel {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+
+  .panel-blue {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .panel-blue::before {
+    content: '';
+    position: absolute; top: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(240,180,41,.12);
+  }
+  .panel-blue::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .panel-blue h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: .8rem;
+  }
+  .panel-blue p { font-size: .875rem; color: rgba(255,255,255,.6); line-height: 1.8; }
+
+  .panel-gold {
+    background: var(--gold);
+    border-radius: 8px;
+    padding: 2rem 2.5rem;
+  }
+  .panel-gold h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--navy); margin-bottom: .5rem;
+  }
+  .panel-gold p { font-size: .875rem; color: rgba(11,31,58,.7); line-height: 1.7; margin-bottom: 1.2rem; }
+
+  .panel-stat-row { display: flex; gap: 2rem; }
+  .panel-stat { border-left: 3px solid rgba(11,31,58,.2); padding-left: 1rem; }
+  .panel-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900; color: var(--navy); line-height: 1;
+  }
+  .panel-stat-label { font-size: .7rem; font-weight: 600; letter-spacing: .06em; color: rgba(11,31,58,.6); }
+
+  /* ── SECTORES ── */
+  #sectores { background: var(--navy); }
+  #sectores .s-title { color: var(--white); }
+  #sectores .s-desc { color: rgba(255,255,255,.5); }
+  #sectores .s-eyebrow { color: var(--gold-light); }
+
+  .sectores-grid {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+
+  .sector-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    transition: background .3s, border-color .3s, transform .3s;
+    text-align: center;
+  }
+  .sector-card:hover {
+    background: rgba(255,255,255,.09);
+    border-color: var(--gold);
+    transform: translateY(-6px);
+  }
+  .sector-card:hover .sector-icon-wrap { background: var(--gold); }
+
+  .sector-icon-wrap {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(240,180,41,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin: 0 auto 1.4rem;
+    transition: background .3s;
+  }
+
+  .sector-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--white);
+    margin-bottom: .6rem;
+  }
+  .sector-desc { font-size: .8rem; color: rgba(255,255,255,.45); line-height: 1.7; }
+
+  /* ── WHY ── */
+  #nosotros { background: var(--off-white); }
+
+  .why-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center; margin-top: 3.5rem;
+  }
+
+  .why-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .why-item {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding: 1.8rem;
+    background: var(--white);
+    border-radius: 6px;
+    border: 1.5px solid rgba(21,80,160,.08);
+    transition: border-color .25s, transform .25s, box-shadow .25s;
+  }
+  .why-item:hover { border-color: var(--blue-mid); transform: translateX(4px); box-shadow: 0 6px 24px rgba(21,80,160,.08); }
+
+  .why-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--blue-mid); line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .why-title {
+    font-size: 1rem; font-weight: 600; color: var(--navy);
+    margin-bottom: .35rem;
+  }
+  .why-desc { font-size: .85rem; color: var(--gray); line-height: 1.7; }
+
+  .why-visual {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .why-visual::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(240,180,41,.08);
+  }
+  .why-visual::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 150px; height: 150px; border-radius: 50%;
+    background: rgba(26,101,200,.2);
+  }
+
+  .why-visual-content { position: relative; z-index: 1; }
+
+  .visual-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: var(--white); line-height: 1.2; margin-bottom: 1.5rem;
+  }
+  .visual-headline span { color: var(--gold); font-style: italic; }
+
+  .visual-checklist { display: flex; flex-direction: column; gap: .9rem; }
+  .visual-check-item {
+    display: flex; align-items: center; gap: .8rem;
+    font-size: .875rem; color: rgba(255,255,255,.75);
+  }
+  .check-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(240,180,41,.2); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .65rem; color: var(--gold); flex-shrink: 0;
+  }
+
+  .visual-cta {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .visual-cta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 900; color: var(--gold);
+  }
+  .visual-cta-text { font-size: .8rem; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  #contacto { background: var(--white); }
+
+  .contact-layout {
+    display: grid; grid-template-columns: 1fr 1.3fr;
+    gap: 5rem; align-items: start; margin-top: 3.5rem;
+  }
+
+  .contact-left { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .contact-card {
+    background: var(--off-white);
+    border-radius: 8px;
+    padding: 1.6rem 2rem;
+    display: flex; align-items: center; gap: 1.2rem;
+    border: 1.5px solid rgba(21,80,160,.07);
+    transition: border-color .25s, background .25s;
+  }
+  .contact-card:hover { border-color: var(--blue-mid); background: var(--sky); }
+
+  .cc-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+
+  .cc-label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gray); margin-bottom: .2rem;
+  }
+  .cc-value { font-size: .95rem; font-weight: 600; color: var(--navy); }
+
+  .contact-info-note {
+    background: var(--navy);
+    border-radius: 8px; padding: 2rem;
+    margin-top: .5rem;
+  }
+  .contact-info-note p {
+    font-size: .875rem; color: rgba(255,255,255,.6);
+    line-height: 1.8;
+  }
+  .contact-info-note strong { color: var(--gold); font-weight: 600; }
+
+  /* FORM */
+  .contact-form {
+    background: var(--off-white);
+    border-radius: 12px;
+    padding: 3rem;
+    border: 1.5px solid rgba(21,80,160,.08);
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--navy);
+    margin-bottom: .5rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .4rem; }
+
+  .form-group label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--gray);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--white);
+    border: 1.5px solid rgba(21,80,160,.12);
+    color: var(--text);
+    padding: .8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .9rem;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    resize: vertical;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue-mid);
+    box-shadow: 0 0 0 3px rgba(26,101,200,.1);
+  }
+  .form-group select option { background: var(--white); }
+
+  .form-submit {
+    font-size: .875rem; font-weight: 700; letter-spacing: .06em;
+    background: var(--navy); color: var(--white);
+    border: none; padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: .6rem;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    align-self: stretch;
+  }
+  .form-submit:hover {
+    background: var(--blue-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(21,80,160,.3);
+  }
+
+  .form-note {
+    font-size: .75rem; color: var(--gray); text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: .4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 3.5rem 5rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem; align-items: start;
+  }
+
+  .footer-brand .logo { font-size: 1.4rem; margin-bottom: .7rem; display: inline-flex; }
+  .footer-brand p { font-size: .825rem; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 220px; }
+
+  .footer-col h4 {
+    font-size: .7rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+  .footer-col ul li a {
+    font-size: .85rem; color: rgba(255,255,255,.5); text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-col ul li a:hover { color: var(--white); }
+
+  .footer-bottom {
+    background: #080f1c;
+    padding: 1.2rem 5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,.05);
+  }
+  .footer-bottom p { font-size: .75rem; color: rgba(255,255,255,.3); }
+  .footer-bottom a { font-size: .75rem; color: var(--gold); text-decoration: none; }
+
+  /* ── WA FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    background: #25d366; color: white;
+    width: 56px; height: 56px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; text-decoration: none;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    #hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 8rem 2rem 5rem; }
+    .s-pad, .s-pad-sm { padding: 5rem 1.5rem; }
+    .maq-grid { grid-template-columns: 1fr 1fr; }
+    .servicios-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .serv-grid { grid-template-columns: 1fr; }
+    .sectores-grid { grid-template-columns: 1fr 1fr; }
+    .why-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: .5rem; text-align: center; padding: 1rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-area">
+    <img src="assets/img/logo.png" alt="Logo" class="logo-image">
+    <span class="brand">OPDACOR</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#arriendo">Arriendo</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sectores">Sectores</a></li>
+    <li><a href="#nosotros">Empresa</a></li>
+    <li><a href="#contacto" class="nav-cta">Cotizar ahora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <div class="hero-circle hero-circle-3"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-line"></span>
+      Maquinaria · Logística · Minería
+    </div>
+    <h1 class="hero-title">
+      Tu Socio<br>Estratégico en<br>
+      <span class="line-gold">Servicios Industriales</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Arriendo de maquinaria pesada y servicios especializados para empresas mineras y logísticas. Operamos con los más altos estándares de seguridad, cumplimiento y profesionalismo.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-gold">Solicitar Cotización →</a>
+      <a href="#arriendo" class="btn-outline-white">Ver Equipos</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">+10</div>
+        <div class="stat-label">Años de<br>Experiencia</div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Soporte<br>Operacional</div>
+      </div>
+      <div>
+        <div class="stat-num">+50</div>
+        <div class="stat-label">Clientes<br>Satisfechos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-feature-card">
+      <div class="hero-fc-icon">🚜</div>
+      <div>
+        <div class="hero-fc-title">Arriendo de Maquinaria Pesada</div>
+        <div class="hero-fc-desc">Retroexcavadoras, camiones aljibe, tolvas y más</div>
+      </div>
+    </div>
+    <div class="hero-feature-card">
+      <div class="hero-fc-icon">💧</div>
+      <div>
+        <div class="hero-fc-title">Servicios Hídricos</div>
+        <div class="hero-fc-desc">Bombas de agua, venta de agua, lavado de estanques</div>
+      </div>
+    </div>
+    <div class="hero-feature-card">
+      <div class="hero-fc-icon">🧹</div>
+      <div>
+        <div class="hero-fc-title">Limpieza Industrial</div>
+        <div class="hero-fc-desc">Fosas, losas y baños químicos para faenas</div>
+      </div>
+    </div>
+    <div class="hero-feature-card">
+      <div class="hero-fc-icon">🔗</div>
+      <div>
+        <div class="hero-fc-title">Subcontratación Integral</div>
+        <div class="hero-fc-desc">Coordinamos cualquier servicio que necesites</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Retroexcavadoras <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Camiones Aljibe <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Tolvas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Bombas de Agua <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Camionetas 4x4 <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Baños Químicos <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Limpieza de Fosas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Lavado de Estanques <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Venta de Agua <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Gasfitería <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Limpieza de Losas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Subcontratación <span class="ticker-sep"></span></span>
+    <!-- duplicate -->
+    <span class="ticker-item">Retroexcavadoras <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Camiones Aljibe <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Tolvas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Bombas de Agua <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Camionetas 4x4 <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Baños Químicos <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Limpieza de Fosas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Lavado de Estanques <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Venta de Agua <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Gasfitería <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Limpieza de Losas <span class="ticker-sep"></span></span>
+    <span class="ticker-item">Subcontratación <span class="ticker-sep"></span></span>
+  </div>
+</div>
+
+<!-- ARRIENDO -->
+<section id="arriendo" class="s-pad">
+  <div class="arriendo-header">
+    <div>
+      <div class="s-eyebrow">Arriendo de Equipos</div>
+      <h2 class="s-title">Flota Propia &<br><em>Operadores Certificados</em></h2>
+      <p class="s-desc">Todos nuestros equipos cuentan con mantenimiento preventivo y operadores calificados para garantizar continuidad en tu faena.</p>
+    </div>
+    <a href="#contacto" class="btn-gold" style="flex-shrink:0;">Ver disponibilidad →</a>
+  </div>
+  <div class="maq-grid">
+    <div class="maq-card">
+      <div class="maq-icon-wrap">🚜</div>
+      <div class="maq-name">Retroexcavadoras</div>
+      <p class="maq-desc">Equipos de diversas capacidades para movimiento de tierra, excavaciones y trabajos en terreno difícil o de alta montaña.</p>
+      <span class="maq-badge">Disponible ahora</span>
+    </div>
+    <div class="maq-card">
+      <div class="maq-icon-wrap">🚛</div>
+      <div class="maq-name">Camiones Aljibe</div>
+      <p class="maq-desc">Transporte y distribución de agua para faenas mineras, obras civiles y operaciones industriales en cualquier zona del país.</p>
+      <span class="maq-badge">Disponible ahora</span>
+    </div>
+    <div class="maq-card">
+      <div class="maq-icon-wrap">🪣</div>
+      <div class="maq-name">Tolvas</div>
+      <p class="maq-desc">Tolvas de diferentes capacidades para transporte de áridos, minerales y residuos industriales con total seguridad.</p>
+      <span class="maq-badge">Disponible ahora</span>
+    </div>
+    <div class="maq-card">
+      <div class="maq-icon-wrap">💧</div>
+      <div class="maq-name">Bombas de Agua</div>
+      <p class="maq-desc">Soluciones de extracción y bombeo para faenas, piques y sectores de difícil acceso. Alta capacidad y confiabilidad.</p>
+      <span class="maq-badge">Disponible ahora</span>
+    </div>
+    <div class="maq-card">
+      <div class="maq-icon-wrap">🚙</div>
+      <div class="maq-name">Camionetas 4x4</div>
+      <p class="maq-desc">Flota de camionetas doble cabina para faenas y traslado de personal en terrenos adversos y zonas de alta exigencia.</p>
+      <span class="maq-badge">Disponible ahora</span>
+    </div>
+    <div class="maq-card maq-card-special">
+      <div class="maq-icon-wrap">⚡</div>
+      <div class="maq-name">¿Otro equipo?</div>
+      <p class="maq-desc">Gestionamos la subcontratación del equipo que necesites. Somos tu único punto de contacto para resolver cualquier requerimiento.</p>
+      <a href="#contacto" class="btn-gold" style="margin-top:1.2rem;font-size:.8rem;padding:.6rem 1.4rem;display:inline-flex;">Consultar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="s-pad" style="background:var(--off-white);">
+  <div class="s-eyebrow">Servicios Especializados</div>
+  <h2 class="s-title">Más Allá de<br><em>la Maquinaria</em></h2>
+  <div class="servicios-layout">
+    <div>
+      <p class="s-desc" style="margin-bottom:2.5rem;">Ofrecemos una gama completa de servicios industriales y sanitarios para mantener tu operación sin interrupciones.</p>
+      <div class="serv-grid">
+        <div class="serv-card">
+          <span class="serv-card-icon">🚽</span>
+          <div class="serv-card-name">Arriendo de Baños Químicos</div>
+          <div class="serv-card-tag">Obras y faenas</div>
+        </div>
+        <div class="serv-card">
+          <span class="serv-card-icon">🧹</span>
+          <div class="serv-card-name">Limpieza de Fosas Sépticas</div>
+          <div class="serv-card-tag">Extracción certificada</div>
+        </div>
+        <div class="serv-card">
+          <span class="serv-card-icon">🛢️</span>
+          <div class="serv-card-name">Lavado de Estanques</div>
+          <div class="serv-card-tag">Desinfección y protocolo</div>
+        </div>
+        <div class="serv-card">
+          <span class="serv-card-icon">💦</span>
+          <div class="serv-card-name">Venta de Agua</div>
+          <div class="serv-card-tag">Abastecimiento industria</div>
+        </div>
+        <div class="serv-card">
+          <span class="serv-card-icon">🔧</span>
+          <div class="serv-card-name">Gasfitería Industrial</div>
+          <div class="serv-card-tag">Instalación y mantención</div>
+        </div>
+        <div class="serv-card">
+          <span class="serv-card-icon">🏗️</span>
+          <div class="serv-card-name">Limpieza de Losas</div>
+          <div class="serv-card-tag">Alta presión industrial</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="servicios-right-panel">
+      <div class="panel-blue">
+        <h3>🔗 Subcontratación Integral</h3>
+        <p>¿Necesitas un servicio fuera de nuestra lista? Lo gestionamos por ti. Coordinamos proveedores certificados y asumimos la responsabilidad de la ejecución. Tú te enfocas en tu operación.</p>
+      </div>
+      <div class="panel-gold">
+        <h3>Presencia Nacional</h3>
+        <p>Operamos en faenas de zona norte, centro y sur. Con disponibilidad para movilizarnos donde tu operación lo requiera.</p>
+        <div class="panel-stat-row">
+          <div class="panel-stat">
+            <div class="panel-stat-num">Norte</div>
+            <div class="panel-stat-label">Antofagasta · Atacama</div>
+          </div>
+          <div class="panel-stat">
+            <div class="panel-stat-num">Centro</div>
+            <div class="panel-stat-label">RM · Valparaíso</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1.5px solid rgba(21,80,160,.1);border-radius:8px;padding:1.8rem;display:flex;align-items:center;gap:1.2rem;">
+        <span style="font-size:2rem;">📲</span>
+        <div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:.3rem;">Emergencia en faena</div>
+          <a href="https://wa.me/56912345678" target="_blank" style="font-size:.8rem;color:var(--blue-mid);font-weight:500;text-decoration:none;">Escríbenos por WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORES -->
+<section id="sectores" class="s-pad">
+  <div class="s-eyebrow">Industrias que Atendemos</div>
+  <h2 class="s-title">Sectores de<br><em style="color:var(--gold-light)">Especialización</em></h2>
+  <div class="sectores-grid">
+    <div class="sector-card">
+      <div class="sector-icon-wrap">⛏️</div>
+      <div class="sector-name">Minería</div>
+      <p class="sector-desc">Equipos y servicios adaptados a las exigencias de faenas mineras. Experiencia en gran altura y condiciones de alta demanda.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon-wrap">🚚</div>
+      <div class="sector-name">Logística</div>
+      <p class="sector-desc">Soporte operacional completo para empresas de transporte: agua, limpieza y arriendo de equipos de apoyo logístico.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon-wrap">🏗️</div>
+      <div class="sector-name">Construcción</div>
+      <p class="sector-desc">Maquinaria de movimiento de tierra, servicios sanitarios y soluciones hídricas para proyectos de obras civiles.</p>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon-wrap">🏭</div>
+      <div class="sector-name">Industria</div>
+      <p class="sector-desc">Mantención, limpieza industrial y arriendo de equipos para plantas, bodegas y centros de distribución.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ -->
+<section id="nosotros" class="s-pad">
+  <div class="why-layout">
+    <div>
+      <div class="s-eyebrow">Por qué elegirnos</div>
+      <h2 class="s-title">Confianza que se<br><em>Construye</em> con Hechos</h2>
+      <p class="s-desc" style="margin-bottom:3rem;">No vendemos promesas. Entregamos resultados medibles, equipos en buen estado y servicios que cumplen los plazos acordados.</p>
+      <div class="why-list">
+        <div class="why-item">
+          <span class="why-num">01</span>
+          <div>
+            <div class="why-title">Flota Propia Certificada</div>
+            <p class="why-desc">Todos nuestros equipos tienen mantenimiento preventivo documentado y operadores con licencias vigentes. Garantizamos disponibilidad real.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">02</span>
+          <div>
+            <div class="why-title">Un Solo Punto de Contacto</div>
+            <p class="why-desc">Coordinamos múltiples servicios y proveedores. Tú interlocutas con nosotros y nosotros resolvemos el resto.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <span class="why-num">03</span>
+          <div>
+            <div class="why-title">Respuesta ante Emergencias</div>
+            <p class="why-desc">Disponibilidad para urgencias fuera de horario. Sabemos que en faena, una hora de paralización tiene costo real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-visual">
+      <div class="why-visual-content">
+        <div class="visual-headline">
+          Seguridad &<br><span>Profesionalismo</span><br>en cada operación
+        </div>
+        <div class="visual-checklist">
+          <div class="visual-check-item"><div class="check-icon">✓</div> Equipos con revisión técnica al día</div>
+          <div class="visual-check-item"><div class="check-icon">✓</div> Operadores con capacitación vigente</div>
+          <div class="visual-check-item"><div class="check-icon">✓</div> Cumplimiento de normativas de seguridad</div>
+          <div class="visual-check-item"><div class="check-icon">✓</div> Contratos claros y transparentes</div>
+          <div class="visual-check-item"><div class="check-icon">✓</div> Seguimiento post-servicio garantizado</div>
+          <div class="visual-check-item"><div class="check-icon">✓</div> Cobertura en todo Chile</div>
+        </div>
+        <div class="visual-cta">
+          <div class="visual-cta-num">+10</div>
+          <div class="visual-cta-text">años operando en<br>minería y logística nacional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="s-pad" style="background:var(--off-white);">
+  <div class="s-eyebrow">Contacto</div>
+  <h2 class="s-title">Cotiza sin<br><em>Compromiso</em></h2>
+  <div class="contact-layout">
+    <div class="contact-left">
+      <p class="s-desc">Cuéntanos tu necesidad y te respondemos con una propuesta adaptada a tu operación. Sin burocracia, sin demoras.</p>
+      <div class="contact-card">
+        <div class="cc-icon">📞</div>
+        <div>
+          <div class="cc-label">Teléfono</div>
+          <div class="cc-value">+56 9 1234 5678</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">📧</div>
+        <div>
+          <div class="cc-label">Email</div>
+          <div class="cc-value">contacto@serviequip.cl</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">📍</div>
+        <div>
+          <div class="cc-label">Cobertura</div>
+          <div class="cc-value">Todo Chile — Zona Norte y Central</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-icon">🕐</div>
+        <div>
+          <div class="cc-label">Horario</div>
+          <div class="cc-value">Lun–Vie 8:00–18:00 · Emergencias 24/7</div>
+        </div>
+      </div>
+      <div class="contact-info-note">
+        <p>¿Urgencia? Puedes escribirnos directamente por <strong>WhatsApp</strong> y te atendemos fuera del horario habitual. Para faenas activas, tenemos cobertura de emergencia.</p>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-title">Solicitar Cotización</div>
+      <p style="font-size:.875rem;color:var(--gray);margin-bottom:.5rem;">Completa el formulario y te contactamos en menos de 24 horas hábiles.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre completo" required>
+        </div>
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" placeholder="Razón social">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+56 9 XXXX XXXX">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="tu@empresa.cl" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Servicio requerido</label>
+        <select>
+          <option value="">Selecciona un servicio...</option>
+          <option>Arriendo Retroexcavadora</option>
+          <option>Camión Aljibe</option>
+          <option>Tolva</option>
+          <option>Bombas de Agua</option>
+          <option>Camionetas 4x4</option>
+          <option>Limpieza de Fosas</option>
+          <option>Lavado de Estanques</option>
+          <option>Venta de Agua</option>
+          <option>Gasfitería</option>
+          <option>Limpieza de Losas</option>
+          <option>Baños Químicos</option>
+          <option>Subcontratación / Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensaje</label>
+        <textarea rows="4" placeholder="Describe tu necesidad, zona de faena, fechas estimadas y cualquier detalle relevante..."></textarea>
+      </div>
+      <button type="submit" class="form-submit" onclick="handleSubmit(this)">
+        Enviar Solicitud →
+      </button>
+      <p class="form-note">🔒 Tu información es confidencial y solo se usará para responder tu consulta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="#" class="logo"><span class="logo-accent"></span> Servi<span>Equip</span></a>
+    <p>Maquinaria y servicios especializados para la industria minera y logística de Chile.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Servicios</h4>
+    <ul>
+      <li><a href="#arriendo">Arriendo de Maquinaria</a></li>
+      <li><a href="#servicios">Servicios Hídricos</a></li>
+      <li><a href="#servicios">Limpieza Industrial</a></li>
+      <li><a href="#servicios">Baños Químicos</a></li>
+      <li><a href="#servicios">Gasfitería</a></li>
+      <li><a href="#servicios">Subcontratación</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Empresa</h4>
+    <ul>
+      <li><a href="#nosotros">Quiénes somos</a></li>
+      <li><a href="#sectores">Sectores</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://wa.me/56912345678">WhatsApp</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 ServiEquip · Todos los derechos reservados</p>
+  <a href="mailto:contacto@serviequip.cl">contacto@serviequip.cl</a>
+</div>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/56912345678" target="_blank" class="wa-float" title="WhatsApp">📲</a>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.maq-card, .serv-card, .sector-card, .why-item, .contact-card').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = `opacity .5s ease ${i * 0.07}s, transform .5s ease ${i * 0.07}s`;
+    observer.observe(el);
+  });
+
+  // Form
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Enviado — Te contactamos pronto';
+    btn.style.background = '#16a34a';
+    btn.disabled = true;
+  }
+
+  // Nav scroll style
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.boxShadow =
+      window.scrollY > 60 ? '0 4px 24px rgba(0,0,0,.35)' : 'none';
+  });
+</script>
+</body>
+</html>
