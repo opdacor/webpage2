@@ -45,19 +45,22 @@
     border-bottom: 2px solid rgba(240,180,41,0.25);
   }
 
-  .logo {
+  .logo-area {
+    display: flex; align-items: center; gap: .6rem;
+    text-decoration: none;
+  }
+  .logo-image {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  .brand {
     font-family: 'Playfair Display', serif;
     font-weight: 900; font-size: 1.5rem;
-    color: var(--white); text-decoration: none;
+    color: var(--white);
     letter-spacing: .02em;
-    display: flex; align-items: center; gap: .6rem;
   }
-  .logo-accent {
-    width: 8px; height: 8px; background: var(--gold);
-    border-radius: 50%; display: inline-block;
-    box-shadow: 0 0 10px rgba(240,180,41,.6);
-  }
-  .logo span { color: var(--gold); }
 
   .nav-links {
     display: flex; gap: 2.5rem; list-style: none; align-items: center;
@@ -708,7 +711,7 @@
     gap: 3rem; align-items: start;
   }
 
-  .footer-brand .logo { font-size: 1.4rem; margin-bottom: .7rem; display: inline-flex; }
+  .footer-brand .logo-area { margin-bottom: .7rem; }
   .footer-brand p { font-size: .825rem; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 220px; }
 
   .footer-col h4 {
@@ -768,10 +771,10 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo-area">
+  <a href="#" class="logo-area">
     <img src="assets/img/logo.png" alt="Logo" class="logo-image">
     <span class="brand">OPDACOR</span>
-  </div>
+  </a>
   <ul class="nav-links">
     <li><a href="#arriendo">Arriendo</a></li>
     <li><a href="#servicios">Servicios</a></li>
@@ -1184,7 +1187,10 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
-    <a href="#" class="logo"><span class="logo-accent"></span> Servi<span>Equip</span></a>
+    <a href="#" class="logo-area">
+      <img src="assets/img/logo.png" alt="Logo" class="logo-image" style="height: 34px;">
+      <span class="brand" style="font-size: 1.2rem;">OPDACOR</span>
+    </a>
     <p>Maquinaria y servicios especializados para la industria minera y logística de Chile.</p>
   </div>
   <div class="footer-col">
